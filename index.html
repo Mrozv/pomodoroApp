@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PomodoroApp</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="./assets/pomodorologo.png" />
+    <script
+      src="https://kit.fontawesome.com/8d4cd6574c.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="pomodoro_wrapper">
+      <div class="end_modal">
+        <p>It's the end of session, congratulations!</p>
+        <button id="closeGrats" class="closeModalButton">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="settings_modal">
+        <button id="closeSettings" class="closeModalButton">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <form>
+          <div class="option">
+            <label for="learningTime">Learning Time (min)</label>
+            <input
+              type="number"
+              id="learningTime"
+              name="learningTime"
+              max="99"
+              oninput="validity.valid||(value='');"
+            />
+          </div>
+          <div class="option">
+            <label for="pauseTime">Pause Time (min)</label>
+            <input
+              type="number"
+              id="pauseTime"
+              name="pauseTime"
+              max="99"
+              oninput="validity.valid||(value='');"
+            />
+          </div>
+          <div class="option">
+            <label for="cycle">
+              Amount of
+              <span class="tooltip">cycles</span>
+            </label>
+            <input
+              type="number"
+              id="cycle"
+              name="cycle"
+              max="99"
+              oninput="validity.valid||(value='');"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="title">Pomodoro</div>
+      <div class="buttons_wrapper">
+        <button class="restart">
+          <i class="fa-solid fa-arrow-rotate-left"></i>
+        </button>
+        <button class="settings"><i class="fa-solid fa-sliders"></i></button>
+      </div>
+
+      <div class="timer_wrapper">
+        <div class="timer">-:-</div>
+      </div>
+      <div class="buttons_wrapper">
+        <button class="start">START</button>
+      </div>
+      <div class="progressRing"></div>
+      <a class="goDown" href="#pomoInfo">
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+    </div>
+    <div class="content" id="pomoInfo">
+      <div class="info">
+        <div class="title">What is Pomodoro?</div>
+        <div class="desc">
+          The Pomodoro Technique is a time management method developed by
+          Francesco Cirillo in the late 1980s. The technique uses a timer to
+          break down work into intervals, traditionally 25 minutes in length,
+          separated by short breaks. These intervals are known as "Pomodoros,"
+          the plural in English of the Italian word Pomodoro (tomato), after the
+          tomato-shaped kitchen timer that Cirillo used as a university student.
+
+          <br />
+          <br />
+          <div class="semiTitle">
+            Here's a basic outline of how the Pomodoro Technique works:
+          </div>
+          <ol>
+            <li>Choose a Task: Decide on the task you want to work on.</li>
+            <li>Set the Timer: Set a timer for 25 minutes (one Pomodoro).</li>
+            <li>Work on the Task: Work on the task until the timer rings.</li>
+            <li>Take a Short Break: Take a short break, around 5 minutes.</li>
+          </ol>
+          <br />
+          Repeat: Repeat the process. After completing four Pomodoros, take a
+          longer break, typically 15-30 minutes.
+          <br />
+          <br />
+          The idea behind the Pomodoro Technique is to break work into focused,
+          manageable intervals, which can help improve concentration and reduce
+          the impact of internal and external interruptions. The short breaks
+          provide an opportunity for rest and recovery.
+          <br />
+          <br />
+          While the technique was initially developed for personal productivity,
+          many people find it adaptable to various situations, including
+          studying, writing, programming, or any task that requires focused
+          attention. There are also numerous Pomodoro apps and timers available
+          to help individuals implement this technique.
+        </div>
+      </div>
+    </div>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

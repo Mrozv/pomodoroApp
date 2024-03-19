@@ -1,0 +1,312 @@
+@use "./colors" as *;
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Neonderthaw&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --progress: attr(aria-valuenow);
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  color: $white;
+  .pomodoro_wrapper {
+    position: relative;
+    overflow: hidden;
+    transition: background-color 300ms;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    background-color: $dark;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .end_modal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      background-color: $lightDark;
+      border-radius: 1.6rem;
+      font-size: 2.4rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 3000;
+      transform: translate(-50%, -50%);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      max-width: 70%;
+      visibility: hidden;
+      p {
+        padding: 2rem 0;
+        text-align: center;
+      }
+    }
+    .settings_modal {
+      background-color: $lightDark;
+      visibility: hidden;
+      position: absolute;
+      border-radius: 1.6rem;
+      padding: 5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      z-index: 3000;
+      .option {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        position: relative;
+        label {
+          margin-bottom: 5px;
+          .tooltip {
+            border-bottom: 1px dashed white;
+          }
+          .tooltip::before {
+            content: "1 cycle is equal to 1 pomodoro and 1 pause. If there is only 1 cycle or there is a last cycle, the pause won't show off";
+            font-size: 1.5rem;
+            position: absolute;
+            background-color: rgba(0, 145, 255, 0.9);
+            border-radius: 1.6rem;
+            padding: 10px;
+            display: none;
+            transition: 300ms;
+          }
+          .tooltip:hover::before {
+            display: block;
+            transition: 300ms;
+          }
+        }
+        input {
+          font-size: 2rem;
+          border-radius: 1.6rem;
+          padding: 5px 20px;
+        }
+        input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
+      }
+    }
+
+    .timer_wrapper {
+      z-index: 900;
+      .timer {
+        font-family: "Space Mono", monospace;
+        font-size: 14rem;
+      }
+    }
+
+    .title {
+      font-size: 5rem;
+      z-index: 900;
+    }
+    .buttons_wrapper {
+      z-index: 2000;
+      display: flex;
+      gap: 2rem;
+      button {
+        font-size: 2.5rem;
+        background: none;
+        color: white;
+        cursor: pointer;
+      }
+      .start {
+        border: 2px solid white;
+        border-radius: 1.6rem;
+        padding: 0.5em 1em;
+        transition: 300ms;
+      }
+      .start:hover {
+        background-color: white;
+        color: #333;
+      }
+    }
+  }
+  .pomodoroBg {
+    background-color: $green;
+  }
+
+  .pauseBg {
+    background-color: $orange;
+  }
+
+  .defaultBg {
+    background-color: $dark;
+  }
+  .content {
+    color: $dark;
+    padding: 4rem 6rem;
+    .info {
+      .title {
+        font-size: 4.8rem;
+      }
+      .semiTitle {
+        font-size: 3.6rem;
+      }
+      .title,
+      .semiTitle {
+        background-color: $white;
+        position: relative;
+        margin-bottom: 1rem;
+      }
+      .title::after,
+      .semiTitle::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -20px;
+        background-color: $orange;
+        width: 0.5rem;
+        height: 100%;
+      }
+      .desc {
+        font-size: 2.4rem;
+        ol {
+          list-style-position: inside;
+        }
+      }
+    }
+  }
+}
+
+.show {
+  visibility: visible !important;
+}
+
+.progressRing {
+  position: absolute;
+}
+
+.progressRing::after,
+.progressRing::before {
+  position: absolute;
+  content: "";
+}
+
+.progressRing::after {
+  width: 52rem;
+  height: 52rem;
+  border-radius: 50%;
+  z-index: 20;
+  background: conic-gradient(
+    lime var(--progress, 100),
+    rgba(255, 255, 255, 0.1) 0
+  );
+  transform: translate(-50%, -50%);
+}
+
+.progressRing::before {
+  width: 50rem;
+  height: 50rem;
+  background-color: #333;
+  z-index: 30;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.closeModalButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1em;
+  background: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.goDown {
+  margin: 1em;
+  position: absolute;
+  bottom: 0;
+  background: none;
+  color: $white;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  body {
+    .pomodoro_wrapper {
+      .settings_modal {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        z-index: 3000;
+        .option {
+          label {
+            .tooltip {
+              position: static;
+            }
+            .tooltip::before {
+              left: 10px;
+              top: 35%;
+              width: 90%;
+            }
+          }
+        }
+      }
+      .title {
+        font-size: 2.8rem;
+      }
+      .timer_wrapper {
+        .timer {
+          font-size: 8rem;
+        }
+      }
+    }
+    .content {
+      padding: 4rem 2rem;
+      .info {
+        .title,
+        .semiTitle {
+          line-height: 3.8rem;
+          font-size: 3.8rem;
+        }
+        .desc {
+          font-size: 1.8rem;
+        }
+      }
+    }
+    .progressRing::before {
+      width: 30rem;
+      height: 30rem;
+      background-color: #333;
+      z-index: 30;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .progressRing::after {
+      width: 31rem;
+      height: 31rem;
+      border-radius: 50%;
+      z-index: 20;
+      background: conic-gradient(
+        lime var(--progress, 0),
+        rgba(255, 255, 255, 0.1) 0
+      );
+      transform: translate(-50%, -50%);
+    }
+  }
+}
